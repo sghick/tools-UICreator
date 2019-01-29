@@ -20,7 +20,11 @@
 * 定义模板名称
   * name=UIImageView
 * 定义模板输入格式
-  * format=(instance name)
+  * format=(instance_name)
+* 定义功能说明
+  * rem=创建一对UIImageView类型的Getter,Setter方法
+* 定义模板内容
+  * `content=@property (strong, nonatomic) UIImageView *<.name.>\n\n- (<.name.> *)<.instance_name.> {\n\tif (!_<.instance_name.>) {\n\t\t_<.instance_name.> = [[<.name.> alloc] init];\n\t}\n\treturn _<.instance_name.>;\n}`
 
 
 ## 示例
