@@ -17,12 +17,13 @@
 
 
 ## 模板创建
-* 定义响应命名类型(默认可不写)
+* 定义响应命名类型(取文件名中`_`前的字符串)
   * cmd=g
-* 定义模板名称(默认可不写)
+* 定义模板名称(取文件名中`_`后的字符串)
   * name=UIImageView
-* 定义模板输入格式
-  * format=(instance_name)
+* 定义模板输入格式(多个输入源以`,`分隔
+  * format=instance_name
+  * format=instance_name1,instance_name2
 * 定义功能说明
   * rem=创建一对UIImageView类型的Getter,Setter方法
 * 定义模板内容
