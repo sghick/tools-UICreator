@@ -17,7 +17,9 @@
 
 
 ## 模板创建
-* 定义模板名称
+* 定义响应命名类型(默认可不写)
+  * cmd=g
+* 定义模板名称(默认可不写)
   * name=UIImageView
 * 定义模板输入格式
   * format=(instance_name)
@@ -25,9 +27,10 @@
   * rem=创建一对UIImageView类型的Getter,Setter方法
 * 定义模板内容
   * `content=@property (strong, nonatomic) UIImageView *<.name.>\n\n- (<.name.> *)<.instance_name.> {\n\tif (!_<.instance_name.>) {\n\t\t_<.instance_name.> = [[<.name.> alloc] init];\n\t}\n\treturn _<.instance_name.>;\n}`
-
+* 文件名规范
+  * 响应命名类型 + '_' + 模板名称,如 `g_UIImageView`
 
 ## 示例
 * 快速创建UIImageView的实例
-  * 输入`--c UIImageView backImage`
+  * 输入`--g UIImageView backImage`
   * 输入相应的代码
