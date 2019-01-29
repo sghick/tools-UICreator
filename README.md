@@ -33,5 +33,5 @@
 
 ## 示例
 * 快速创建UIImageView的实例
-  * 输入`--g UIImageView backImage`
+  * 输入`-g UIImageView backImage`
   * 输入相应的代码
