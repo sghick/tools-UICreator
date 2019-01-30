@@ -1,15 +1,15 @@
 #cmd
 #name
-#format
+#params
 instance_name
 #rem
-创建一对相应类型的Getter,Setter方法
+创建Getter方法
 #content
 @property (strong, nonatomic) <.name.> *<.instance_name.>;
 
 - (<.name.> *)<.instance_name.> {
     if (!_<.instance_name.>) {
-        _<.instance_name.> = [[<.name.> alloc] init];
+        _<.instance_name.> = [<.name.> buttonWithType:UIButtonTypeSystem];
     }
     return _<.instance_name.>;
 }

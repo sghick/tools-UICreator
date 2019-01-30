@@ -11,7 +11,7 @@ import (
 type cmdfile struct {
 	cmd string
 	name string
-	format string
+	params string
 	rem string
 	content string
 }
@@ -110,7 +110,13 @@ func BeginRun(ipt string, codeType string) bool {
 		}
 		var root = "./__templates/" 
 		var fp = root + codeType + "/" + cmd + "_" + name + ".txt"
-		var cf = Getfile(fp, cmd, name)
+		var cf, err = Getfile(fp, cmd, name)
+		if err != nil {
+			fmt.Println(err);
+			fmt.Println("使用默认模板'g_.txt'");
+			fp = root + codeType + "/" + cmd + "_.txt"
+			cf, err = Getfile(fp, cmd, name)
+		}
 		var opt = Output(cf, cmd, name, ript)
 
 		fmt.Println("=== ↓↓↓↓↓ === 代码已经生成,并已自动复制到粘贴板中,请收好 === ↓↓↓↓↓ ====")
@@ -122,11 +128,14 @@ func BeginRun(ipt string, codeType string) bool {
 	return true
  }
 
-func Getfile(fp string, cmd string, name string) cmdfile {
+func Getfile(fp string, cmd string, name string) (cmdfile, error) {
 	var cf cmdfile
 	cf.cmd = cmd
 	cf.name = name
-	txt := ReadAll(fp)
+	txt, err := ReadAll(fp)
+	if err != nil {
+		return cf, err
+	}
 	lines := strings.Split(txt, "\n")
 
 	var lastKey string
@@ -136,8 +145,8 @@ func Getfile(fp string, cmd string, name string) cmdfile {
 			lastKey = line
 			continue
 		}
-		if strings.Index(lastKey, "format") > 0 {
-			cf.format = line
+		if strings.Index(lastKey, "params") > 0 {
+			cf.params = line
 			lastKey = ""
 		}
 		if strings.Index(lastKey, "rem") > 0 {
@@ -148,15 +157,15 @@ func Getfile(fp string, cmd string, name string) cmdfile {
 			cf.content = cf.content + line + "\n"
 		}
 	}
-	return cf
+	return cf, nil
  }
 
-func ReadAll(fp string) string {
+func ReadAll(fp string) (string, error) {
 	var result string
 	// 取文件全部内容
-	file, error := os.Open(fp);
-	if error != nil {
-		fmt.Println(error);
+	file, err := os.Open(fp);
+	if err != nil {
+		return result, err
 	}
 	buf2 := make([]byte, 1024);
 	ix := 0;
@@ -170,7 +179,7 @@ func ReadAll(fp string) string {
 		result = string(buf2)
 	}
 	file.Close()
-	return result
+	return result, nil
  }
 
 func Output(cf cmdfile, cmd string, name string, input string) string {
@@ -179,7 +188,7 @@ func Output(cf cmdfile, cmd string, name string, input string) string {
 	result = strings.Replace(result, "<.name.>", name, -1)
 	// 获取输入格式
 	ipts := strings.Split(input, ",")
-	fmts := strings.Split(cf.format, ",")
+	fmts := strings.Split(cf.params, ",")
 	for index := 0; index < len(ipts); index++ {
 		if len(fmts) > index {
 			result = strings.Replace(result, "<." + fmts[index] + ".>", ipts[index], -1)
