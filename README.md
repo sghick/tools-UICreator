@@ -66,7 +66,7 @@ bogon:tools-UICreator teiharufumi$ go run coding.go
   * `#content`:替换原文(#content以下的所有字符都将被列入)
 
 * 输入格式
-  * 如输入:`-g UIContrl control`,第一个参数中'g'会传值给#cmd,第二个参数中'UIControl'会传值给#name,其它参数分别使用#format中定义的其它参数分别使用#params中定义的字符串变量来接收,如'control'会传值给'instance_name'
+  * 如输入:`-g UIContrl control`,第一个参数中`g`会传值给`#cmd`,第二个参数中'UIControl'会传值给`#name`,其它参数分别使用`#params`中定义的其它参数分别使用`#params`中定义的字符串变量来接收,如`control`会传值给`instance_name`
   
 * 样例
 ```
