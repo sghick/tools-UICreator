@@ -26,10 +26,7 @@ func ExportError(error string) {
 
 func GetInput() {
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("-----------------------------------------")
-	fmt.Println("-----------------------------------------")
-    fmt.Println("** 欢迎使用代码机器,不会偷懒的猿不是好猴子~")
-    fmt.Println("** 小提示:\n**   查询可用模板: --s .\n**   退出: --exit")
+	PrintWelcome()
 	fmt.Println("-----------------------------------------")
 	codeTypes :=[] string {"oc", "javascript"}
 	for index := 0; index < len(codeTypes); index++ {
@@ -127,6 +124,19 @@ func BeginRun(ipt string, codeType string) bool {
 	}
 	return true
  }
+
+func PrintWelcome() {
+	fp := "./welcome.txt"
+	txt, err := ReadAll(fp)
+	if err != nil {
+		return
+	}
+	lines := strings.Split(txt, "\n")
+	for index := 0; index < len(lines); index++ {
+		line := lines[index]
+		fmt.Println(line)
+	}
+}
 
 func Getfile(fp string, cmd string, name string) (cmdfile, error) {
 	var cf cmdfile
