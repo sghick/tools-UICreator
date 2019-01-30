@@ -5,7 +5,7 @@
 ## 使用条件
 * golang编译器,安装请参考:http://www.runoob.com/go/go-environment.html
 * 官网安装包地址:https://golang.google.cn/dl/
-* 如果不想安装,也可以直接运行工程目录下的`start`可执行文件
+* 如果不想安装,也可以直接运行工程目录下的`go`可执行文件
 
 
 ## 使用方法
