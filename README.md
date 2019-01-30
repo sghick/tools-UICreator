@@ -1,5 +1,5 @@
 # tools-UICreator
-本脚本目的是将coding中重复劳动取代,只要创建好相应模板,就能生成相应的代码,之后将有mac应用版本
+本脚本目的是将coding中重复劳动取代,只要创建好相应模板,就能生成相应的代码,之后将有mac应用版本,使用go语言是为了练个手^_^.
 
 
 ## 使用条件
@@ -72,7 +72,7 @@ bogon:tools-UICreator teiharufumi$ go run coding.go
 ```
 #cmd
 #name
-#format
+#params
 instance_name
 #rem
 创建一对相应类型的Getter,Setter方法
