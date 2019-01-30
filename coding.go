@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"strings"
 	"strconv"
+	"path/filepath"
 )
 
 type cmdfile struct {
@@ -15,6 +16,8 @@ type cmdfile struct {
 	rem string
 	content string
 }
+
+var _root string
 
 func main() {
 	GetInput()
@@ -105,28 +108,52 @@ func BeginRun(ipt string, codeType string) bool {
 		if len(ipts) >= 3 {
 			ript = ipts[2]
 		}
-		var root = "./__templates/" 
-		var fp = root + codeType + "/" + cmd + "_" + name + ".txt"
+		var fp = GetRootDoc() + "__templates/" + codeType + "/" + cmd + "_" + name + ".txt"
 		var cf, err = Getfile(fp, cmd, name)
 		if err != nil {
+			fp = GetRootDoc() + "__templates/" + codeType + "/" + cmd+ "_" + ".txt"
 			fmt.Println(err);
-			fmt.Println("使用默认模板'g_.txt'");
-			fp = root + codeType + "/" + cmd + "_.txt"
+			fmt.Println("使用默认模板'" + fp + "'...")
 			cf, err = Getfile(fp, cmd, name)
+			if err != nil {
+				fmt.Println("抱歉,没有找到相应的模板~")
+			}
 		}
-		var opt = Output(cf, cmd, name, ript)
 
-		fmt.Println("=== ↓↓↓↓↓ === 代码已经生成,并已自动复制到粘贴板中,请收好 === ↓↓↓↓↓ ====")
-		fmt.Println("")
-		fmt.Println(opt)
-		fmt.Println("")
-		fmt.Println("=== ↑↑↑↑↑ === 代码已经生成,并已自动复制到粘贴板中,请收好 === ↑↑↑↑↑ ===")
+		if err == nil {
+			var opt = Output(cf, cmd, name, ript)
+			fmt.Println("=== ↓↓↓↓↓ === 代码已经生成,并已自动复制到粘贴板中,请收好 === ↓↓↓↓↓ ====")
+			fmt.Println("")
+			fmt.Println(opt)
+			fmt.Println("")
+			fmt.Println("=== ↑↑↑↑↑ === 代码已经生成,并已自动复制到粘贴板中,请收好 === ↑↑↑↑↑ ===")
+		}
 	}
 	return true
  }
 
+func GetRootDoc() string {
+	if strings.Count(_root, "") > 1 {
+		return _root
+	}
+	// 先尝试使用'./'为根目录,如果没有发现'coding.go'文件,则使用运行目录
+	var result = "./"
+	file, err := os.Open(result + "coding.go");
+	if (file == nil) || (err != nil) {
+		result, err := filepath.Abs(filepath.Dir(os.Args[0]))
+		fmt.Println("result:", result)
+		if err != nil {
+			fmt.Println("未找到正确的目录!")
+		}
+		_root = result + "/"
+	}
+	file.Close()
+	_root = result
+	return _root;
+}
+
 func PrintWelcome() {
-	fp := "./welcome.txt"
+	fp := GetRootDoc() + "welcome.txt"
 	txt, err := ReadAll(fp)
 	if err != nil {
 		return
