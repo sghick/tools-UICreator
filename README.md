@@ -56,24 +56,18 @@ bogon:tools-UICreator teiharufumi$ go run coding.go
 * 文件名
   * 文件名可以写成`g_UIButton.txt`,使用命令`-g UIButton param1,param2`来指定此模板
   * 文件名可以写成`g_.txt`,表示未找到对应name的文件时,默认时使用的模板
-* 
+  * 规范:响应命名类型 + '_' + 模板名称,如 `g_UIImageView.txt`,只能以`.txt`为扩展名
+
+* 变量介绍
+  * `#cmd`:响应命名类型
+  * `#name`:模板名称
+  * `#params`:参数接收(多个输入源以`,`分隔,如:instance_name1,instance_name2)
+  * `#rem`:功能说明
+  * `#content`:替换原文(#content以下的所有字符都将被列入)
+
+* 输入格式
+  * 如输入:`-g UIContrl control`,第一个参数中'g'会传值给#cmd,第二个参数中'UIControl'会传值给#name,其它参数分别使用#format中定义的其它参数分别使用#params中定义的字符串变量来接收,如'control'会传值给'instance_name'
   
-  
-* 响应命名类型(取文件名中`_`前的字符串)
-  * #cmd
-* 模板名称(取文件名中`_`后的字符串)
-  * #name
-* 模板输入格式(多个输入源以`,`分隔
-  * #format
-* 功能说明
-  * #rem
-* 模板内容(#content以下的所有字符都将被列入)
-  * #content
-* 文件名规范
-  * 响应命名类型 + '_' + 模板名称,如 `g_UIImageView.txt`
-* 其它说明
-  * 输入格式中,如`-g UIContrl control`,第一个参数中'g'会传值给#cmd,第二个参数中'UIControl'会传值给#name,其它参数分别使用#format中定义的其它参数分别使用#format中定义的字符串变量来接收,如'control'会传值给'instance_name'
-  * #format 中,如果需要多个参数,以逗号分隔,如:instance_name1,instance_name2
 * 样例
 ```
 #cmd
