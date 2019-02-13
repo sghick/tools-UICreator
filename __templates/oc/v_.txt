@@ -1,0 +1,36 @@
+#cmd
+#name
+#params
+#rem
+创建view类的模板
+#content
+@interface <.name.> ()
+
+@property (assign, nonatomic) BOOL didLoadLayout;
+
+@end
+
+@implementation <.name.>
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self createSubviews];
+    }
+    return self;
+}
+
+- (void)createSubviews {
+    
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)updateConstraints {
+    if (!self.didLoadLayout) {
+        self.didLoadLayout = YES;
+
+    }
+    [super updateConstraints];
+}
+
+@end
