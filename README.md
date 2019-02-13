@@ -67,7 +67,7 @@
 #cmd
 #name
 #params
-instance_name
+instance_name,instance_name2
 #rem
 创建一对相应类型的Getter,Setter方法
 #content
@@ -79,6 +79,8 @@ instance_name
     }
     return _<.instance_name.>;
 }
+
+// I am params2 -> <.instance_name2.>
 ```
 
 
