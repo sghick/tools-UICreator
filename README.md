@@ -89,7 +89,6 @@ instance_name,instance_name2
 | ------ | ------ |
 | `-g` | 创建Getter方法 | 
 | `-v` | 创建空的view类 | 
-| `-ce` | 创建空的UITableViewCell类 |
 | `-vc` | 创建控制器 | 
 | `-ta` | 创建Target和Action方法 | 
 | `-sql` | 创建数据库'增','删','改','查'一套方法 | 
