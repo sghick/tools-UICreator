@@ -1,5 +1,6 @@
 # tools-UICreator
-本脚本目的是将coding中重复劳动取代,只要创建好相应模板,就能生成相应的代码,之后将有mac应用版本,使用go语言是为了练个手^_^.
+本脚本目的是将coding中重复劳动取代,只要创建好相应模板,就能自动生成相应的代码,之后将有mac应用版本,使用go语言是为了练个手^_^.
+``粘贴板功能和`go`可执行文件暂时还没有调通``
 
 
 ## 使用条件
@@ -14,13 +15,6 @@
 * `__templates`文件夹中存放了各种语言的模板
 * 输入`go run coding.go`运行程序,根据提示进行使用:
 ```
-bogon:tools-UICreator teiharufumi$ go run coding.go 
------------------------------------------
------------------------------------------
-** 欢迎使用代码机器,不会偷懒的猿不是好猴子~
-** 小提示:
-**   查询可用模板: --s .
-**   退出: --exit
 -----------------------------------------
 0 : oc
 1 : javascript
@@ -29,7 +23,7 @@ bogon:tools-UICreator teiharufumi$ go run coding.go
 您选择的语言是:oc
 -> 
 ```
-* 系统级指令以`--`2根短线开头,模板指令以`-`1根短线开头,请注意区分
+* `系统指令`以`--`2根短线开头,`模板指令`以`-`1根短线开头,请注意区分
 * 自定义模板指令字符无长度限制
 * 输入`-g UIImageView img`,工程将按照模板将替换后的代码输出,同时会放到粘贴板上.
 ```
@@ -73,7 +67,7 @@ bogon:tools-UICreator teiharufumi$ go run coding.go
 #cmd
 #name
 #params
-instance_name
+instance_name,instance_name2
 #rem
 创建一对相应类型的Getter,Setter方法
 #content
@@ -85,7 +79,20 @@ instance_name
     }
     return _<.instance_name.>;
 }
+
+// I am params2 -> <.instance_name2.>
 ```
+
+
+## 推荐模板指令
+| 模板指令 | 功能说明 |
+| ------ | ------ |
+| `-g` | 创建Getter方法 | 
+| `-v` | 创建空的view类 | 
+| `-vc` | 创建控制器 | 
+| `-ta` | 创建Target和Action方法 | 
+| `-sql` | 创建数据库'增','删','改','查'一套方法 | 
+| `-api` | 创建API对象 |  
 
 
 ## 已有模板
