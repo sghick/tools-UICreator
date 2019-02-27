@@ -53,14 +53,14 @@
   * 规范:响应命名类型 + '_' + 模板名称,如 `g_UIImageView.txt`,只能以`.txt`为扩展名
 
 * 变量介绍
-  * `#cmd`:响应命名类型
-  * `#name`:模板名称
-  * `#params`:参数接收(多个输入源以`,`分隔,如:instance_name1,instance_name2)
-  * `#rem`:功能说明
-  * `#content`:替换原文(#content以下的所有字符都将被列入)
+  * `$$cmd`:响应命名类型
+  * `$$name`:模板名称
+  * `$$params`:参数接收(多个输入源以`,`分隔,如:instance_name1,instance_name2)
+  * `$$rem`:功能说明
+  * `$$content`:替换原文(#content以下的所有字符都将被列入)
 
 * 输入格式
-  * 如输入:`-g UIContrl control`,第一个参数中`g`会传值给`#cmd`,第二个参数中'UIControl'会传值给`#name`,其它参数分别使用`#params`中定义的其它参数分别使用`#params`中定义的字符串变量来接收,如`control`会传值给`instance_name`
+  * 如输入:`-g UIContrl control`,第一个参数中`g`会传值给`$$cmd`,第二个参数中'UIControl'会传值给`$$name`,其它参数分别使用`$$params`中定义的其它参数分别使用`$$params`中定义的字符串变量来接收,如`control`会传值给`instance_name`
   
 * 样例
 ```
@@ -71,16 +71,16 @@ instance_name,instance_name2
 #rem
 创建一对相应类型的Getter,Setter方法
 #content
-@property (strong, nonatomic) <.name.> *<.instance_name.>;
+@property (strong, nonatomic) <#name#> *<#instance_name#>;
 
-- (<.name.> *)<.instance_name.> {
-    if (!_<.instance_name.>) {
-        _<.instance_name.> = [[<.name.> alloc] init];
+- (<.name.> *)<#instance_name#> {
+    if (!_<#instance_name#>) {
+        _<#instance_name#> = [[<#name#> alloc] init];
     }
-    return _<.instance_name.>;
+    return _<#instance_name#>;
 }
 
-// I am params2 -> <.instance_name2.>
+// I am params2 -> <#instance_name2#>
 ```
 
 
