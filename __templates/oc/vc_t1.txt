@@ -1,0 +1,40 @@
+$$params
+ClassName
+$$rem
+创建view类的模板
+$$content
+#import "<#ClassName#>.h"
+
+typedef NS_ENUM(NSInteger, kSectionType) {
+    kSectionType
+};
+
+typedef NS_ENUM(NSInteger, kRowType) {
+    kRowType
+};
+
+@interface <#ClassName#> ()<
+UITableViewSectionsDelegate,
+UITableViewDataSource,
+UITableViewDelegate>
+
+@property (strong, nonatomic) UITableView *tableView;
+
+@end
+
+@implementation <#ClassName#>
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.view addSubview:self.tableView];
+    
+    [self.tableView bds_reloadData];
+}
+
+
+#pragma mark - UITableViewSectionsDelegate
+
+- (BDSSections *)sectionsInTableView:(UITableView *)tableView {
+    BDSSections *sections = [[BDSSections alloc] init];
+    return sections;
+}

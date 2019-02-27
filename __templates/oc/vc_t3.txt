@@ -1,0 +1,25 @@
+$$params
+ClassName
+$$rem
+创建view类的模板
+$$content
+#pragma mark - Getters
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,
+                                                                   self.navigationView.bottom,
+                                                                   SCREEN_WIDTH,
+                                                                   SCREEN_HEIGHT - BOTTOM_HEIGHT - self.navigationView.bottom)
+                                                  style:UITableViewStylePlain];
+        _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.sectionsDelegate = self;
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        
+        [_tableView bds_markCustomTableViewSeparators];
+    }
+    return _tableView;
+}
+
+@end

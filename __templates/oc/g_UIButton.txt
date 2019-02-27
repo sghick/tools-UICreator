@@ -1,15 +1,15 @@
-#cmd
-#name
-#params
+$$cmd
+$$name
+$$params
 instance_name
-#rem
+$$rem
 创建Getter方法
-#content
-@property (strong, nonatomic) <.name.> *<.instance_name.>;
+$$content
+@property (strong, nonatomic) <#name#> *<#instance_name#>;
 
-- (<.name.> *)<.instance_name.> {
-    if (!_<.instance_name.>) {
-        _<.instance_name.> = [<.name.> buttonWithType:UIButtonTypeSystem];
+- (<#name#> *)<#instance_name#> {
+    if (!_<#instance_name#>) {
+        _<#instance_name#> = [<#name#> buttonWithType:UIButtonTypeSystem];
     }
-    return _<.instance_name.>;
+    return _<#instance_name#>;
 }

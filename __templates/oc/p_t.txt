@@ -1,0 +1,81 @@
+$$cmd
+$$name
+$$params
+ClassName
+$$rem
+创建view类的模板
+$$content
+
+typedef NS_ENUM(NSInteger, kSectionType) {
+    kSectionType
+};
+
+typedef NS_ENUM(NSInteger, kRowType) {
+    kRowType
+};
+
+@interface <#ClassName#> ()<
+UITableViewSectionsDelegate,
+UITableViewDataSource,
+UITableViewDelegate>
+
+@property (strong, nonatomic) UITableView *tableView;
+
+@end
+
+#pragma mark - UITableViewSectionsDelegate
+
+- (BDSSections *)sectionsInTableView:(UITableView *)tableView {
+    BDSSections *sections = [[BDSSections alloc] init];
+    return sections;
+}
+
+#pragma mark - UITableViewDataSource, UITableViewDelegate>
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return tableView.sections.sectionSamesCountOfAll;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    BDSSection *sec = [tableView sectionWithIndexPathSection:section];
+    return sec.rowSamesCountOfAll;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView bds_setSeparatorsWithFormat:BDSSeperatorsFormatAllLong cell:cell indexPath:indexPath];
+}
+
+#pragma mark - Getters
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,
+                                                                   self.navigationView.bottom,
+                                                                   SCREEN_WIDTH,
+                                                                   SCREEN_HEIGHT - BOTTOM_HEIGHT - self.navigationView.bottom)
+                                                  style:UITableViewStylePlain];
+        _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.sectionsDelegate = self;
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        
+        [_tableView bds_markCustomTableViewSeparators];
+    }
+    return _tableView;
+}
+

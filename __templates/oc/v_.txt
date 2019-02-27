@@ -1,16 +1,17 @@
-#cmd
-#name
-#params
-#rem
+$$cmd
+$$name
+$$params
+className
+$$rem
 创建view类的模板
-#content
-@interface <.name.> ()
+$$content
+@interface <#className#> ()
 
 @property (assign, nonatomic) BOOL didLoadLayout;
 
 @end
 
-@implementation <.name.>
+@implementation <#className#>
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

@@ -121,7 +121,7 @@ func BeginRun(ipt string, codeType string) bool {
 		}
 
 		if err == nil {
-			var opt = Output(cf, cmd, name, ript)
+			var opt = ReplaceContent(cf.content, cf, ript)
 			fmt.Println("=== ↓↓↓↓↓ === 代码已经生成,并已自动复制到粘贴板中,请收好 === ↓↓↓↓↓ ====")
 			fmt.Println("")
 			fmt.Println(opt)
@@ -178,19 +178,20 @@ func Getfile(fp string, cmd string, name string) (cmdfile, error) {
 	var lastKey string
 	for index := 0; index < len(lines); index++ {
 		line := lines[index]
-		if strings.Index(line, "#") == 0 {
+		if strings.Index(line, "$$") == 0 {
 			lastKey = line
+			fmt.Println(line)
 			continue
 		}
-		if strings.Index(lastKey, "params") > 0 {
+		if strings.Index(lastKey, "$$params") == 0 {
 			cf.params = line
 			lastKey = ""
 		}
-		if strings.Index(lastKey, "rem") > 0 {
+		if strings.Index(lastKey, "$$rem") == 0 {
 			cf.rem = line
 			lastKey = ""
 		}
-		if strings.Index(lastKey, "content") > 0 {
+		if strings.Index(lastKey, "$$content") == 0 {
 			cf.content = cf.content + line + "\n"
 		}
 	}
@@ -219,16 +220,18 @@ func ReadAll(fp string) (string, error) {
 	return result, nil
  }
 
-func Output(cf cmdfile, cmd string, name string, input string) string {
-	var result = cf.content
+func ReplaceContent(content string, cf cmdfile, input string) string {
+	var result = content
 	// 替换类名
-	result = strings.Replace(result, "<.name.>", name, -1)
+	result = strings.Replace(result, "<#rem#>", cf.rem, -1)
+	result = strings.Replace(result, "<#name#>", cf.name, -1)
+	result = strings.Replace(result, "<#cmd#>", cf.cmd, -1)
 	// 获取输入格式
 	ipts := strings.Split(input, ",")
 	fmts := strings.Split(cf.params, ",")
 	for index := 0; index < len(ipts); index++ {
 		if len(fmts) > index {
-			result = strings.Replace(result, "<." + fmts[index] + ".>", ipts[index], -1)
+			result = strings.Replace(result, "<#" + fmts[index] + "#>", ipts[index], -1)
 		}
 	}
 	return result

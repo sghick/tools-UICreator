@@ -1,17 +1,17 @@
-#cmd
-#name
-#params
+$$cmd
+$$name
+$$params
 className
-#rem
+$$rem
 创建view类的模板
-#content
-@interface <.className.> ()
+$$content
+@interface <#className#> ()
 
 @property (assign, nonatomic) BOOL didLoadLayout;
 
 @end
 
-@implementation <.className.>
+@implementation <#className#>
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
