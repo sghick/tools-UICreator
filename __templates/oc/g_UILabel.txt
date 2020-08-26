@@ -1,0 +1,17 @@
+$$cmd
+$$name
+$$params
+instance_name,font,color
+$$rem
+创建对应类型的Getter方法
+$$content
+@property (strong, nonatomic) <#name#> *<#instance_name#>;
+
+- (<#name#> *)<#instance_name#> {
+    if (!_<#instance_name#>) {
+        _<#instance_name#> = [[<#name#> alloc] init];
+        _<#instance_name#>.font = <#font#>;
+        _<#instance_name#>.textColor = <#color#>;
+    }
+    return _<#instance_name#>;
+}

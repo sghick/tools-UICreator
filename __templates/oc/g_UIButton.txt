@@ -1,15 +1,27 @@
 $$cmd
 $$name
 $$params
-instance_name
+instance_name,title,font,color
 $$rem
 创建Getter方法
 $$content
 @property (strong, nonatomic) <#name#> *<#instance_name#>;
 
+#pragma mark - Actions
+
+- (void)<#instance_name#>Action:(<#name#> *)sender {
+    
+}
+
+#pragma mark - Getters
+
 - (<#name#> *)<#instance_name#> {
     if (!_<#instance_name#>) {
         _<#instance_name#> = [<#name#> buttonWithType:UIButtonTypeSystem];
+        [_<#instance_name#> addTarget:self action:@selector(<#instance_name#>Action:) forControlEvents:UIControlEventTouchUpInside];
+        [_<#instance_name#> setTitle:<#title#> forState:UIControlStateNormal];
+        _<#instance_name#>.titleLabel.font = <#font#>;
+        [_<#instance_name#> setTitleColor:<#color#> forState:UIControlStateNormal];
     }
     return _<#instance_name#>;
 }
